@@ -61,20 +61,29 @@ const OTHER_FOSSILS = [
 ];
 // TODO: Replace this comment with your code
 app.get('/top-fossils', (req, res) => {
-  const name = req.session.name;
-
+  const name = req.query.name;
+  if(name){
   res.render('top-fossils.html.njk',{
       fossils: Object.values(MOST_LIKED_FOSSILS),
       name: name
-    })
+    })}
+    else{
+      res.render('homepage.html.njk')
+    }
 })
 app.get('/', (req,res) => {
   res.render('homepage.html.njk')
 })
 app.get('/get-name', (req,res) => {
-  const name = req.session.name;
-  res.render('top-fossils.html.njk',
-  {name: name})
+  const name = req.query.name;
+  if(name){
+  res.render('top-fossils.html.njk',{
+      fossils: Object.values(MOST_LIKED_FOSSILS),
+      name: name
+    })}
+    else{
+      res.render('homepage.html.njk')
+    }
 })
 
 
