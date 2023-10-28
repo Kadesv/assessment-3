@@ -59,8 +59,25 @@ const OTHER_FOSSILS = [
     name: 'Triceratops',
   },
 ];
-
 // TODO: Replace this comment with your code
+app.get('/top-fossils', (req, res) => {
+  const name = req.session.name;
+
+  res.render('top-fossils.html.njk',{
+      fossils: Object.values(MOST_LIKED_FOSSILS),
+      name: name
+    })
+})
+app.get('/', (req,res) => {
+  res.render('homepage.html.njk')
+})
+app.get('/get-name', (req,res) => {
+  const name = req.session.name;
+  res.render('top-fossils.html.njk',
+  {name: name})
+})
+
+
 
 app.get('/random-fossil.json', (req, res) => {
   const randomFossil = lodash.sample(OTHER_FOSSILS);
