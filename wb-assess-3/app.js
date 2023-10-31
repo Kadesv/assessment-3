@@ -65,6 +65,7 @@ app.get('/top-fossils', (req, res) => {
   if(name){
   res.render('top-fossils.html.njk',{
       fossils: Object.values(MOST_LIKED_FOSSILS),
+      fossilObj: Object.keys(MOST_LIKED_FOSSILS),
       name: name
     })}
     else{
@@ -78,18 +79,28 @@ app.get('/get-name', (req,res) => {
   const name = req.query.name;
   if(name){
   res.render('top-fossils.html.njk',{
-      fossils: Object.values(MOST_LIKED_FOSSILS),
+    fossils : Object.values(MOST_LIKED_FOSSILS),
+    fossilObj: Object.keys(MOST_LIKED_FOSSILS),
+
       name: name
     })}
     else{
       res.render('homepage.html.njk')
     }
 })
-
+app.post('/like-fossil', (req,res) => {
+  const choice = req.query.form;
+  choice.num_likes += 1;
+  const name = req.query.name;
+  res.render('thank-you.html.njk',{
+    choice : choice,
+    name : name
+  })
+})
 
 
 app.get('/random-fossil.json', (req, res) => {
-  const randomFossil = lodash.sample(OTHER_FOSSILS);
+  const randomFossil =lodash.sample(OTHER_FOSSILS);
   res.json(randomFossil);
 });
 

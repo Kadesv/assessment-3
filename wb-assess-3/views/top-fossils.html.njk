@@ -12,17 +12,14 @@
       <img src="{{fossil.img}}" />
     </div>
   {% endfor %}
-
-  <form>
-  <div class="dropdown">
-  <button onclick="myFunction()" class="dropbtn">Dropdown</button>
-  <div id="myDropdown" class="dropdown-content">
-    <p></p>
-    <p></p>
-    <p></p>
-    <p></p>
-  </div>
-</div>
-
-  </form>
+<h1>Select your favorite!</h1>
+<form action='/like-fossil'>
+  <select>
+    {%for fossil in fossils%}
+      <option value='{{fossil}}'>{{fossil.name}}</option>
+    {% endfor %}
+  </select>
+  <br>
+    <button type='submit'>Click Here to confirm</button>
+</form>
 {% endblock %}
